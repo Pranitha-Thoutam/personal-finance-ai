@@ -1,0 +1,635 @@
+/* =============================================
+   FINIO — DARK BLUE THEME OVERRIDE
+   Append to styles.css (after all existing rules)
+   or import as a separate file after styles.css
+   ============================================= */
+
+/* ── Re-map all design tokens ─────────────────── */
+:root {
+  /* Shell & backgrounds */
+  --bg-shell:       #f0f4f8;
+  --bg-sidebar:     #0f172a;
+  --bg-card:        #ffffff;
+  --bg-card-alt:    #f1f5f9;
+  --bg-highlight:   #eff6ff;
+
+  /* Accent — blue palette replaces green */
+  --accent-primary: #2563eb;
+  --accent-light:   #60a5fa;
+  --accent-warm:    #f59e0b;
+  --accent-soft:    #bfdbfe;
+
+  /* Page text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+
+  /* Sidebar text */
+  --text-sidebar:        #e2e8f0;
+  --text-sidebar-muted:  #64748b;
+
+  /* Sidebar states */
+  --sidebar-active:    #1e293b;
+  --sidebar-hover:     #1e293b;
+  --sidebar-indicator: #3b82f6;
+
+  /* Borders */
+  --border-soft:  #e2e8f0;
+  --border-card:  #e2e8f0;
+
+  /* Shadows — slightly deeper for white cards on pale shell */
+  --shadow-card:  0 1px 3px rgba(15,23,42,0.07), 0 4px 16px rgba(15,23,42,0.05);
+  --shadow-hover: 0 4px 14px rgba(15,23,42,0.12), 0 8px 32px rgba(15,23,42,0.07);
+}
+
+/* ── Shell background ─────────────────────────── */
+html, body, #root {
+  background: var(--bg-shell);
+  color: var(--text-primary);
+}
+
+/* ── Sidebar decorative glow — now blue ──────── */
+.sidebar::before {
+  background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%);
+}
+
+/* ── Logo icon gradient — blue ───────────────── */
+.logo-icon {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* ── Sidebar active indicator ────────────────── */
+.nav-item.active::before,
+.sidebar-nav a.nav-item.active::before {
+  background: #3b82f6;
+}
+
+/* ── Sidebar profile avatar ──────────────────── */
+.profile-avatar {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* ── Topbar ───────────────────────────────────── */
+.main-topbar {
+  background: rgba(240, 244, 248, 0.88);
+  border-bottom-color: var(--border-soft);
+}
+
+/* ── Add button in topbar ────────────────────── */
+.add-btn,
+.topbar-btn.add-btn {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+.topbar-btn.add-btn:hover {
+  background: #1d4ed8 !important;
+}
+
+/* notification dot — keep amber for visibility */
+.notification-dot::after {
+  background: var(--accent-warm);
+}
+
+/* ── Stat cards ───────────────────────────────── */
+.stat-card {
+  background: var(--bg-card);
+  border-color: var(--border-card);
+}
+
+.stat-icon.green { background: #eff6ff; color: #2563eb; }
+.stat-icon.warm  { background: #fffbeb; color: #f59e0b; }
+.stat-icon.blue  { background: #eff6ff; color: #2563eb; }
+.stat-icon.light { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+
+.stat-change.up      { color: #2563eb; background: #eff6ff; }
+.stat-change.down    { color: #f59e0b; background: #fffbeb; }
+.stat-change.neutral { color: var(--text-muted); background: var(--bg-card-alt); }
+
+/* ── Section links ────────────────────────────── */
+.section-link { color: var(--accent-primary); }
+.section-link:hover { opacity: 0.75; }
+
+/* ── Budget progress bars ────────────────────── */
+.budget-fill { opacity: 0.85; }
+
+/* ── Transaction amounts ─────────────────────── */
+.txn-amount.credit,
+.txn-amt-in,
+.txn-row-amount.credit { color: var(--accent-primary); }
+
+/* ── Chart legend dots ───────────────────────── */
+.legend-dot.income   { background: #2563eb; }
+
+/* Update line chart line color via CSS custom property */
+/* (SVG paths in Dashboard use inline stroke — override via data attributes isn't possible,
+    but the donut/bar legend dots and any class-based elements are updated here) */
+
+/* ── Insight cards — left border colours ─────── */
+.insight-card {
+  border-left-color: var(--accent-soft);
+}
+
+/* ── Period tabs (Analytics) ─────────────────── */
+.period-tab.active {
+  color: var(--accent-primary);
+  box-shadow: 0 1px 3px rgba(37,99,235,0.12);
+}
+
+/* ── Filter chips ────────────────────────────── */
+.filter-chip.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.txnp-filter-btn--all.active {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+.txnp-filter-btn--income.active {
+  background: #eff6ff;
+  color: var(--accent-primary);
+}
+.txnp-filter-btn--expense.active {
+  background: #fffbeb;
+  color: var(--accent-warm);
+}
+
+/* ── Budget progress bar (overall) ───────────── */
+.budget-overall-bar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* ── Budget status chips ─────────────────────── */
+.bp-status-chip.ok   { background: #eff6ff; color: #2563eb; }
+.bp-status-chip.warn { background: #fffbeb; color: #d97706; }
+.bp-status-chip.over { background: #fef3c7; color: #f59e0b; }
+
+/* ── Budget save button ──────────────────────── */
+.bp-save-btn {
+  background: var(--accent-primary);
+}
+.bp-save-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+}
+
+/* ── Budget success message ──────────────────── */
+.bp-success-msg {
+  color: var(--accent-primary);
+  background: #eff6ff;
+}
+
+/* ── Transaction submit button ───────────────── */
+.txnp-submit {
+  background: var(--accent-primary);
+}
+.txnp-submit:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.28);
+}
+
+/* ── Notes submit button ─────────────────────── */
+.nt-submit {
+  background: var(--accent-primary);
+}
+.nt-submit:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.28);
+}
+
+.nt-filter-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* ── Chat send button ────────────────────────── */
+.chat-send-btn {
+  background: var(--accent-primary);
+}
+.chat-send-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+/* ── Chat online dot ─────────────────────────── */
+.chat-online-dot {
+  background: var(--accent-primary);
+}
+
+/* ── Chat avatar bot ─────────────────────────── */
+.chat-panel-avatar,
+.chat-avatar-bot,
+.ai-icon-wrap {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* ── Chat user bubble ────────────────────────── */
+.chat-msg.user .chat-bubble {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* ── AI card (Dashboard) ─────────────────────── */
+.ai-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+}
+
+/* ── Quick suggestion buttons ────────────────── */
+.chat-suggestion-btn:hover {
+  background: #eff6ff;
+  border-color: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* ── Analytics bar chart (Recharts) ─────────── */
+/* Recharts uses inline styles so we target
+   the SVG fill classes it adds to the DOM */
+.recharts-bar-rectangle path[fill="#3d8c6e"],
+.recharts-line[stroke="#3d8c6e"] path {
+  fill: #2563eb;
+}
+
+/* ── Pie / donut legend pct colours are inline;
+   category colors stay unchanged (they are
+   category-specific, not accent-dependent) ─── */
+
+/* ── Scrollbar thumb ─────────────────────────── */
+::-webkit-scrollbar-thumb {
+  background: var(--border-soft);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-soft);
+}
+
+/* ── Section title font — same, no change ──── */
+
+/* ── Topbar Add button (Layout.jsx inline style
+   already sets accent-primary; this covers the
+   non-inline fallback class) ─────────────────── */
+.topbar-btn[style*="accent-primary"] {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+/* ── Confirmation yes buttons ────────────────── */
+.txnp-confirm-yes,
+.nt-confirm-yes {
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+}
+
+/* ── Error banners stay amber — intentional ─── */
+
+/* ── Pie chart legend pct values ─────────────── */
+.an-pie-legend-pct,
+.dash-donut-pct {
+  /* category-specific colors set inline; no override needed */
+}
+
+/* ── Analytics insight border left ───────────── */
+.insight-card[style*="accent-primary"] {
+  border-left-color: var(--accent-primary) !important;
+}
+
+/* ── Budget category dot colours are inline ──── */
+/* (no override needed — they use per-category hex) */
+
+/* ── Topbar avatar (Layout.jsx) ──────────────── */
+.topbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow var(--transition);
+  user-select: none;
+}
+
+.topbar-avatar:hover {
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+
+/* =============================================
+   FINIO — DARK BLUE THEME OVERRIDE
+   Append to styles.css (after all existing rules)
+   or import as a separate file after styles.css
+   ============================================= */
+
+/* ── Re-map all design tokens ─────────────────── */
+:root {
+  /* Shell & backgrounds */
+  --bg-shell:       #f0f4f8;
+  --bg-sidebar:     #0f172a;
+  --bg-card:        #ffffff;
+  --bg-card-alt:    #f1f5f9;
+  --bg-highlight:   #eff6ff;
+
+  /* Accent — blue palette replaces green */
+  --accent-primary: #2563eb;
+  --accent-light:   #60a5fa;
+  --accent-warm:    #f59e0b;
+  --accent-soft:    #bfdbfe;
+
+  /* Page text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+
+  /* Sidebar text */
+  --text-sidebar:        #e2e8f0;
+  --text-sidebar-muted:  #64748b;
+
+  /* Sidebar states */
+  --sidebar-active:    #1e293b;
+  --sidebar-hover:     #1e293b;
+  --sidebar-indicator: #3b82f6;
+
+  /* Borders */
+  --border-soft:  #e2e8f0;
+  --border-card:  #e2e8f0;
+
+  /* Shadows — slightly deeper for white cards on pale shell */
+  --shadow-card:  0 1px 3px rgba(15,23,42,0.07), 0 4px 16px rgba(15,23,42,0.05);
+  --shadow-hover: 0 4px 14px rgba(15,23,42,0.12), 0 8px 32px rgba(15,23,42,0.07);
+}
+
+/* ── Shell background ─────────────────────────── */
+html, body, #root {
+  background: var(--bg-shell);
+  color: var(--text-primary);
+}
+
+/* ── Sidebar decorative glow — now blue ──────── */
+.sidebar::before {
+  background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%);
+}
+
+/* ── Logo icon gradient — blue ───────────────── */
+.logo-icon {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* ── Sidebar active indicator ────────────────── */
+.nav-item.active::before,
+.sidebar-nav a.nav-item.active::before {
+  background: #3b82f6;
+}
+
+/* ── Sidebar profile avatar ──────────────────── */
+.profile-avatar {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* ── Topbar ───────────────────────────────────── */
+.main-topbar {
+  background: rgba(240, 244, 248, 0.88);
+  border-bottom-color: var(--border-soft);
+}
+
+/* ── Add button in topbar ────────────────────── */
+.add-btn,
+.topbar-btn.add-btn {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+.topbar-btn.add-btn:hover {
+  background: #1d4ed8 !important;
+}
+
+/* notification dot — keep amber for visibility */
+.notification-dot::after {
+  background: var(--accent-warm);
+}
+
+/* ── Stat cards ───────────────────────────────── */
+.stat-card {
+  background: var(--bg-card);
+  border-color: var(--border-card);
+}
+
+.stat-icon.green { background: #eff6ff; color: #2563eb; }
+.stat-icon.warm  { background: #fffbeb; color: #f59e0b; }
+.stat-icon.blue  { background: #eff6ff; color: #2563eb; }
+.stat-icon.light { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+
+.stat-change.up      { color: #2563eb; background: #eff6ff; }
+.stat-change.down    { color: #f59e0b; background: #fffbeb; }
+.stat-change.neutral { color: var(--text-muted); background: var(--bg-card-alt); }
+
+/* ── Section links ────────────────────────────── */
+.section-link { color: var(--accent-primary); }
+.section-link:hover { opacity: 0.75; }
+
+/* ── Budget progress bars ────────────────────── */
+.budget-fill { opacity: 0.85; }
+
+/* ── Transaction amounts ─────────────────────── */
+.txn-amount.credit,
+.txn-amt-in,
+.txn-row-amount.credit { color: var(--accent-primary); }
+
+/* ── Chart legend dots ───────────────────────── */
+.legend-dot.income   { background: #2563eb; }
+
+/* Update line chart line color via CSS custom property */
+/* (SVG paths in Dashboard use inline stroke — override via data attributes isn't possible,
+    but the donut/bar legend dots and any class-based elements are updated here) */
+
+/* ── Insight cards — left border colours ─────── */
+.insight-card {
+  border-left-color: var(--accent-soft);
+}
+
+/* ── Period tabs (Analytics) ─────────────────── */
+.period-tab.active {
+  color: var(--accent-primary);
+  box-shadow: 0 1px 3px rgba(37,99,235,0.12);
+}
+
+/* ── Filter chips ────────────────────────────── */
+.filter-chip.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.txnp-filter-btn--all.active {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+.txnp-filter-btn--income.active {
+  background: #eff6ff;
+  color: var(--accent-primary);
+}
+.txnp-filter-btn--expense.active {
+  background: #fffbeb;
+  color: var(--accent-warm);
+}
+
+/* ── Budget progress bar (overall) ───────────── */
+.budget-overall-bar-fill {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* ── Budget status chips ─────────────────────── */
+.bp-status-chip.ok   { background: #eff6ff; color: #2563eb; }
+.bp-status-chip.warn { background: #fffbeb; color: #d97706; }
+.bp-status-chip.over { background: #fef3c7; color: #f59e0b; }
+
+/* ── Budget save button ──────────────────────── */
+.bp-save-btn {
+  background: var(--accent-primary);
+}
+.bp-save-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+}
+
+/* ── Budget success message ──────────────────── */
+.bp-success-msg {
+  color: var(--accent-primary);
+  background: #eff6ff;
+}
+
+/* ── Transaction submit button ───────────────── */
+.txnp-submit {
+  background: var(--accent-primary);
+}
+.txnp-submit:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.28);
+}
+
+/* ── Notes submit button ─────────────────────── */
+.nt-submit {
+  background: var(--accent-primary);
+}
+.nt-submit:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.28);
+}
+
+.nt-filter-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* ── Chat send button ────────────────────────── */
+.chat-send-btn {
+  background: var(--accent-primary);
+}
+.chat-send-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+/* ── Chat online dot ─────────────────────────── */
+.chat-online-dot {
+  background: var(--accent-primary);
+}
+
+/* ── Chat avatar bot ─────────────────────────── */
+.chat-panel-avatar,
+.chat-avatar-bot,
+.ai-icon-wrap {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+/* ── Chat user bubble ────────────────────────── */
+.chat-msg.user .chat-bubble {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* ── AI card (Dashboard) ─────────────────────── */
+.ai-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+}
+
+/* ── Quick suggestion buttons ────────────────── */
+.chat-suggestion-btn:hover {
+  background: #eff6ff;
+  border-color: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* ── Analytics bar chart (Recharts) ─────────── */
+/* Recharts uses inline styles so we target
+   the SVG fill classes it adds to the DOM */
+.recharts-bar-rectangle path[fill="#3d8c6e"],
+.recharts-line[stroke="#3d8c6e"] path {
+  fill: #2563eb;
+}
+
+/* ── Pie / donut legend pct colours are inline;
+   category colors stay unchanged (they are
+   category-specific, not accent-dependent) ─── */
+
+/* ── Scrollbar thumb ─────────────────────────── */
+::-webkit-scrollbar-thumb {
+  background: var(--border-soft);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-soft);
+}
+
+/* ── Section title font — same, no change ──── */
+
+/* ── Topbar Add button (Layout.jsx inline style
+   already sets accent-primary; this covers the
+   non-inline fallback class) ─────────────────── */
+.topbar-btn[style*="accent-primary"] {
+  background: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+
+/* ── Confirmation yes buttons ────────────────── */
+.txnp-confirm-yes,
+.nt-confirm-yes {
+  background: var(--accent-warm);
+  border-color: var(--accent-warm);
+}
+
+/* ── Error banners stay amber — intentional ─── */
+
+/* ── Pie chart legend pct values ─────────────── */
+.an-pie-legend-pct,
+.dash-donut-pct {
+  /* category-specific colors set inline; no override needed */
+}
+
+/* ── Analytics insight border left ───────────── */
+.insight-card[style*="accent-primary"] {
+  border-left-color: var(--accent-primary) !important;
+}
+
+/* ── Budget category dot colours are inline ──── */
+/* (no override needed — they use per-category hex) */
+
+/* ── Topbar avatar (Layout.jsx) ──────────────── */
+.topbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow var(--transition);
+  user-select: none;
+}
+
+.topbar-avatar:hover {
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
