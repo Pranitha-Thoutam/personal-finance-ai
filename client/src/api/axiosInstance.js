@@ -3,7 +3,7 @@ import axios from "axios";
 // Base URL reads from Vite env var; falls back to localhost for development.
 // In your .env file add: VITE_API_URL=http://localhost:5000/api
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://personal-finance-ai-63er.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
